@@ -7,7 +7,7 @@ import { ARButton } from "./three_js/ARButton.js";
 import { OrbitControls } from "./three_js/OrbitControls.js";
 
 let scene = new THREE.Scene();
-scene.background = new THREE.Color("#ffffff");
+//scene.background = new THREE.Color("#ffffff");
 const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
@@ -15,6 +15,10 @@ const camera = new THREE.PerspectiveCamera(
   10000
 );
 camera.position.set(-1000, 900, -2500);
+const cameraFixture = new THREE.Group();
+cameraFixture.add(camera);
+cameraFixture.position.set(-10, 10, -10);
+scene.add(cameraFixture);
 
 var renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setClearColor(0x000000);
@@ -55,7 +59,9 @@ let onSelect = () => {
       mesh.material = new THREE.MeshLambertMaterial();
       mesh.material.flatShading = true;
       mesh.material.metalness = 0;
-      mesh.position.y = -100;
+      mesh.position.set(0, 0, 0).applyMatrix4(controller.matrixWorld);
+      mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
+      mesh.scale.set(0.01, 0.005, 0.005);
       scene.add(mesh);
     },
     function (xhr) {
@@ -66,158 +72,158 @@ let onSelect = () => {
     }
   );
 
-  //MORSKIE OKO ZNACZNIK
-  let momaterial = new THREE.LineBasicMaterial({
-    color: 0x0000ff,
-    linewidth: 10,
-    linecap: "round",
-    linejoin: "roud",
-  });
+  //   //MORSKIE OKO ZNACZNIK
+  //   let momaterial = new THREE.LineBasicMaterial({
+  //     color: 0x0000ff,
+  //     linewidth: 10,
+  //     linecap: "round",
+  //     linejoin: "roud",
+  //   });
 
-  let mopoints = [];
-  mopoints.push(new THREE.Vector3(0, 0, 0));
-  mopoints.push(new THREE.Vector3(0, 850, 0));
+  //   let mopoints = [];
+  //   mopoints.push(new THREE.Vector3(0, 0, 0));
+  //   mopoints.push(new THREE.Vector3(0, 850, 0));
 
-  let mogeometry = new THREE.BufferGeometry().setFromPoints(mopoints);
+  //   let mogeometry = new THREE.BufferGeometry().setFromPoints(mopoints);
 
-  let moline = new THREE.Line(mogeometry, momaterial);
-  moline.position.set(-100, 0, 0);
-  scene.add(moline);
+  //   let moline = new THREE.Line(mogeometry, momaterial);
+  //   moline.position.set(-100, 0, 0);
+  //   scene.add(moline);
 
-  var fontLoader = new THREE.FontLoader();
+  //   var fontLoader = new THREE.FontLoader();
 
-  fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
-    let Textgeometry = new THREE.TextGeometry("Morskie Oko", {
-      font: font,
-      size: 60,
-      height: 5,
-      curveSegments: 12,
-      bevelEnabled: true,
-      bevelThickness: 10,
-      bevelSize: 0,
-      bevelOffset: 0,
-      bevelSegments: 5,
-    });
-    let textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    let text = new THREE.Mesh(Textgeometry, textMaterial);
-    text.position.set(0, 900, 0);
-    text.rotateY(600);
-    scene.add(text);
-  });
+  //   fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
+  //     let Textgeometry = new THREE.TextGeometry("Morskie Oko", {
+  //       font: font,
+  //       size: 60,
+  //       height: 5,
+  //       curveSegments: 12,
+  //       bevelEnabled: true,
+  //       bevelThickness: 10,
+  //       bevelSize: 0,
+  //       bevelOffset: 0,
+  //       bevelSegments: 5,
+  //     });
+  //     let textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+  //     let text = new THREE.Mesh(Textgeometry, textMaterial);
+  //     text.position.set(0, 900, 0);
+  //     text.rotateY(600);
+  //     scene.add(text);
+  //   });
 
-  //Rysy znacznik
-  let rmaterial = new THREE.LineBasicMaterial({
-    color: 0xff0000,
-    linewidth: 10,
-    linecap: "round",
-    linejoin: "roud",
-  });
+  //   //Rysy znacznik
+  //   let rmaterial = new THREE.LineBasicMaterial({
+  //     color: 0xff0000,
+  //     linewidth: 10,
+  //     linecap: "round",
+  //     linejoin: "roud",
+  //   });
 
-  let rpoints = [];
-  rpoints.push(new THREE.Vector3(0, 0, 0));
-  rpoints.push(new THREE.Vector3(0, 1200, 0));
+  //   let rpoints = [];
+  //   rpoints.push(new THREE.Vector3(0, 0, 0));
+  //   rpoints.push(new THREE.Vector3(0, 1200, 0));
 
-  let rgeometry = new THREE.BufferGeometry().setFromPoints(rpoints);
+  //   let rgeometry = new THREE.BufferGeometry().setFromPoints(rpoints);
 
-  let rline = new THREE.Line(rgeometry, rmaterial);
-  rline.position.set(410, 0, 680);
-  scene.add(rline);
+  //   let rline = new THREE.Line(rgeometry, rmaterial);
+  //   rline.position.set(410, 0, 680);
+  //   scene.add(rline);
 
-  fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
-    let Textgeometry = new THREE.TextGeometry("Rysy", {
-      font: font,
-      size: 60,
-      height: 5,
-      curveSegments: 12,
-      bevelEnabled: true,
-      bevelThickness: 10,
-      bevelSize: 0,
-      bevelOffset: 0,
-      bevelSegments: 5,
-    });
-    let textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    let text = new THREE.Mesh(Textgeometry, textMaterial);
-    text.position.set(500, 1250, 700);
-    text.rotateY(600);
-    scene.add(text);
-  });
+  //   fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
+  //     let Textgeometry = new THREE.TextGeometry("Rysy", {
+  //       font: font,
+  //       size: 60,
+  //       height: 5,
+  //       curveSegments: 12,
+  //       bevelEnabled: true,
+  //       bevelThickness: 10,
+  //       bevelSize: 0,
+  //       bevelOffset: 0,
+  //       bevelSegments: 5,
+  //     });
+  //     let textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+  //     let text = new THREE.Mesh(Textgeometry, textMaterial);
+  //     text.position.set(500, 1250, 700);
+  //     text.rotateY(600);
+  //     scene.add(text);
+  //   });
 
-  //Kozi Wierch znacznik
-  let kwmaterial = new THREE.LineBasicMaterial({
-    color: 0xff0000,
-    linewidth: 10,
-    linecap: "round",
-    linejoin: "roud",
-  });
+  //   //Kozi Wierch znacznik
+  //   let kwmaterial = new THREE.LineBasicMaterial({
+  //     color: 0xff0000,
+  //     linewidth: 10,
+  //     linecap: "round",
+  //     linejoin: "roud",
+  //   });
 
-  let kwpoints = [];
-  kwpoints.push(new THREE.Vector3(0, 0, 0));
-  kwpoints.push(new THREE.Vector3(0, 700, 0));
+  //   let kwpoints = [];
+  //   kwpoints.push(new THREE.Vector3(0, 0, 0));
+  //   kwpoints.push(new THREE.Vector3(0, 700, 0));
 
-  let kwgeometry = new THREE.BufferGeometry().setFromPoints(kwpoints);
+  //   let kwgeometry = new THREE.BufferGeometry().setFromPoints(kwpoints);
 
-  let kwline = new THREE.Line(kwgeometry, kwmaterial);
-  kwline.position.set(-1200, 0, -950);
-  scene.add(kwline);
+  //   let kwline = new THREE.Line(kwgeometry, kwmaterial);
+  //   kwline.position.set(-1200, 0, -950);
+  //   scene.add(kwline);
 
-  fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
-    let Textgeometry = new THREE.TextGeometry("Kozi Wierch", {
-      font: font,
-      size: 60,
-      height: 5,
-      curveSegments: 12,
-      bevelEnabled: true,
-      bevelThickness: 10,
-      bevelSize: 0,
-      bevelOffset: 0,
-      bevelSegments: 5,
-    });
-    let textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    let text = new THREE.Mesh(Textgeometry, textMaterial);
-    text.position.set(-1200, 750, -950);
-    text.rotateY(600);
-    scene.add(text);
-  });
+  //   fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
+  //     let Textgeometry = new THREE.TextGeometry("Kozi Wierch", {
+  //       font: font,
+  //       size: 60,
+  //       height: 5,
+  //       curveSegments: 12,
+  //       bevelEnabled: true,
+  //       bevelThickness: 10,
+  //       bevelSize: 0,
+  //       bevelOffset: 0,
+  //       bevelSegments: 5,
+  //     });
+  //     let textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+  //     let text = new THREE.Mesh(Textgeometry, textMaterial);
+  //     text.position.set(-1200, 750, -950);
+  //     text.rotateY(600);
+  //     scene.add(text);
+  //   });
 
-  //Wielki staw znacznik
-  let wsmaterial = new THREE.LineBasicMaterial({
-    color: 0x0000ff,
-    linewidth: 10,
-    linecap: "round",
-    linejoin: "roud",
-  });
+  //   //Wielki staw znacznik
+  //   let wsmaterial = new THREE.LineBasicMaterial({
+  //     color: 0x0000ff,
+  //     linewidth: 10,
+  //     linecap: "round",
+  //     linejoin: "roud",
+  //   });
 
-  let wspoints = [];
-  wspoints.push(new THREE.Vector3(0, 0, 0));
-  wspoints.push(new THREE.Vector3(0, 950, 0));
+  //   let wspoints = [];
+  //   wspoints.push(new THREE.Vector3(0, 0, 0));
+  //   wspoints.push(new THREE.Vector3(0, 950, 0));
 
-  let wsgeometry = new THREE.BufferGeometry().setFromPoints(wspoints);
+  //   let wsgeometry = new THREE.BufferGeometry().setFromPoints(wspoints);
 
-  let wsline = new THREE.Line(wsgeometry, wsmaterial);
-  wsline.position.set(-950, 0, -500);
-  scene.add(wsline);
+  //   let wsline = new THREE.Line(wsgeometry, wsmaterial);
+  //   wsline.position.set(-950, 0, -500);
+  //   scene.add(wsline);
 
-  fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
-    let Textgeometry = new THREE.TextGeometry("Wielki Staw", {
-      font: font,
-      size: 60,
-      height: 5,
-      curveSegments: 12,
-      bevelEnabled: true,
-      bevelThickness: 10,
-      bevelSize: 0,
-      bevelOffset: 0,
-      bevelSegments: 5,
-    });
-    let textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-    let text = new THREE.Mesh(Textgeometry, textMaterial);
-    text.position.set(-850, 1000, -500);
-    text.rotateY(600);
-    scene.add(text);
-  });
+  //   fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
+  //     let Textgeometry = new THREE.TextGeometry("Wielki Staw", {
+  //       font: font,
+  //       size: 60,
+  //       height: 5,
+  //       curveSegments: 12,
+  //       bevelEnabled: true,
+  //       bevelThickness: 10,
+  //       bevelSize: 0,
+  //       bevelOffset: 0,
+  //       bevelSegments: 5,
+  //     });
+  //     let textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+  //     let text = new THREE.Mesh(Textgeometry, textMaterial);
+  //     text.position.set(-850, 1000, -500);
+  //     text.rotateY(600);
+  //     scene.add(text);
+  //   });
 };
 
-controller = renderer.xr.getController(0);
+let controller = renderer.xr.getController(0);
 controller.addEventListener("select", onSelect);
 scene.add(controller);
 

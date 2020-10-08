@@ -3,7 +3,6 @@
 import * as THREE from "./three_js/three.module.js";
 import { GLTFLoader } from "./three_js/GLTFLoader.js";
 import { DRACOLoader } from "./three_js/DRACOLoader.js";
-// import { VRButton } from 'https://cdn.jsdelivr.net/npm/three@0.119.0/examples/jsm/webxr/VRButton.js';
 import { OrbitControls } from "./three_js/OrbitControls.js";
 
 let scene = new THREE.Scene();
