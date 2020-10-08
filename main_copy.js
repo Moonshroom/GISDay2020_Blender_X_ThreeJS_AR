@@ -53,7 +53,7 @@ let onSelect = () => {
       mesh.material = new THREE.MeshLambertMaterial();
       mesh.material.flatShading = true;
       mesh.material.metalness = 0;
-      mesh.position.set(0, -8, -25).applyMatrix4(controller.matrixWorld);
+      mesh.position.set(0, -8, 0).applyMatrix4(controller.matrixWorld);
       mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
       mesh.scale.set(0.01, 0.01, 0.01);
       scene.add(mesh);
