@@ -14,8 +14,8 @@ const camera = new THREE.PerspectiveCamera(
   10000
 );
 
-var renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setClearColor(0x000000);
+var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+// renderer.setClearColor(0x000000);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.xr.enabled = true;
@@ -30,16 +30,16 @@ controls.minDistance = 1;
 controls.maxDistance = 5000;
 
 let hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
-hemiLight.position.set(0, 800, -750);
+hemiLight.position.set(0, 0, 0);
 scene.add(hemiLight);
 
-let dirLight = new THREE.DirectionalLight(0xffffff);
-dirLight.position.set(75, 800, -750);
-scene.add(dirLight);
+// let dirLight = new THREE.DirectionalLight(0xffffff);
+// dirLight.position.set(0, 0, 0);
+// scene.add(dirLight);
 
-let ambientLight = new THREE.AmbientLight(0xfffff0);
-ambientLight.position.set(0, 700, 0);
-scene.add(ambientLight);
+// let ambientLight = new THREE.AmbientLight(0xfffff0);
+// ambientLight.position.set(0, 0, 0);
+// scene.add(ambientLight);
 
 let onSelect = () => {
   let loader = new GLTFLoader();
@@ -53,7 +53,7 @@ let onSelect = () => {
       mesh.material = new THREE.MeshLambertMaterial();
       mesh.material.flatShading = true;
       mesh.material.metalness = 0;
-      mesh.position.set(0, -8, -18).applyMatrix4(controller.matrixWorld);
+      mesh.position.set(0, -8, -25).applyMatrix4(controller.matrixWorld);
       mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
       mesh.scale.set(0.01, 0.01, 0.01);
       scene.add(mesh);
