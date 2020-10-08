@@ -23,12 +23,6 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 // renderer.physicallyCorrectLights = true;
 document.body.appendChild(renderer.domElement);
 
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
 let hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
 hemiLight.position.set(0, 800, -750);
 scene.add(hemiLight);
@@ -219,6 +213,12 @@ controls.dampingFactor = 0.05;
 controls.screenSpacePanning = false;
 controls.minDistance = 1;
 controls.maxDistance = 5000;
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
 
 window.addEventListener("resize", onWindowResize, false);
 
