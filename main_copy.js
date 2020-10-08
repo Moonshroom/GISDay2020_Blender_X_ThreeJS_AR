@@ -67,7 +67,7 @@ loader.load(
 //MORSKIE OKO ZNACZNIK
 let momaterial = new THREE.LineBasicMaterial({
   color: 0x0000ff,
-  linewidth: 25,
+  linewidth: 10,
   linecap: "round",
   linejoin: "roud",
 });
@@ -106,7 +106,7 @@ fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
 //Rysy znacznik
 let rmaterial = new THREE.LineBasicMaterial({
   color: 0xff0000,
-  linewidth: 25,
+  linewidth: 10,
   linecap: "round",
   linejoin: "roud",
 });
@@ -143,7 +143,7 @@ fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
 //Kozi Wierch znacznik
 let kwmaterial = new THREE.LineBasicMaterial({
   color: 0xff0000,
-  linewidth: 25,
+  linewidth: 10,
   linecap: "round",
   linejoin: "roud",
 });
@@ -180,7 +180,7 @@ fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
 //Wielki staw znacznik
 let wsmaterial = new THREE.LineBasicMaterial({
   color: 0x0000ff,
-  linewidth: 25,
+  linewidth: 10,
   linecap: "round",
   linejoin: "roud",
 });
@@ -222,9 +222,14 @@ controls.minDistance = 1;
 controls.maxDistance = 5000;
 
 window.addEventListener("resize", onWindowResize, false);
+
 function animate() {
-  requestAnimationFrame(animate);
+  renderer.setAnimationLoop(render);
+}
+
+function render() {
   renderer.render(scene, camera);
   controls.update();
 }
+
 animate();
