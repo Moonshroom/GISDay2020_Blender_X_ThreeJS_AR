@@ -31,19 +31,19 @@ controls.screenSpacePanning = false;
 controls.minDistance = 1;
 controls.maxDistance = 5000;
 
+let hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
+hemiLight.position.set(0, 800, -750);
+scene.add(hemiLight);
+
+let dirLight = new THREE.DirectionalLight(0xffffff);
+dirLight.position.set(75, 800, -750);
+scene.add(dirLight);
+
+let ambientLight = new THREE.AmbientLight(0xfffff0);
+ambientLight.position.set(0, 700, 0);
+scene.add(ambientLight);
+
 let onSelect = () => {
-  let hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
-  hemiLight.position.set(0, 800, -750);
-  scene.add(hemiLight);
-
-  let dirLight = new THREE.DirectionalLight(0xffffff);
-  dirLight.position.set(75, 800, -750);
-  scene.add(dirLight);
-
-  let ambientLight = new THREE.AmbientLight(0xfffff0);
-  ambientLight.position.set(0, 700, 0);
-  scene.add(ambientLight);
-
   let loader = new GLTFLoader();
   let dracoLoader = new DRACOLoader();
   loader.setDRACOLoader(dracoLoader);
