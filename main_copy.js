@@ -7,18 +7,12 @@ import { ARButton } from "./three_js/ARButton.js";
 import { OrbitControls } from "./three_js/OrbitControls.js";
 
 let scene = new THREE.Scene();
-//scene.background = new THREE.Color("#ffffff");
 const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
   0.1,
   10000
 );
-camera.position.set(-1000, 900, -2500);
-const cameraFixture = new THREE.Group();
-cameraFixture.add(camera);
-cameraFixture.position.set(-10, 10, -10);
-scene.add(cameraFixture);
 
 var renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setClearColor(0x000000);
@@ -59,9 +53,9 @@ let onSelect = () => {
       mesh.material = new THREE.MeshLambertMaterial();
       mesh.material.flatShading = true;
       mesh.material.metalness = 0;
-      mesh.position.set(0, 0, 0).applyMatrix4(controller.matrixWorld);
+      mesh.position.set(0, -8, -18).applyMatrix4(controller.matrixWorld);
       mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
-      mesh.scale.set(0.01, 0.005, 0.005);
+      mesh.scale.set(0.01, 0.01, 0.01);
       scene.add(mesh);
     },
     function (xhr) {
@@ -240,7 +234,6 @@ function animate() {
 
 function render() {
   renderer.render(scene, camera);
-  controls.update();
 }
 
 animate();
