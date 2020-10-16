@@ -1,10 +1,9 @@
-//cdn
+import * as THREE from "./three_js/three.module.js"; // Three JS import
+import { GLTFLoader } from "./three_js/GLTFLoader.js"; // model loader import
+import { DRACOLoader } from "./three_js/DRACOLoader.js"; // decoder import
+import { OrbitControls } from "./three_js/OrbitControls.js"; // navigation through the scene import
 
-import * as THREE from "./three_js/three.module.js";
-import { GLTFLoader } from "./three_js/GLTFLoader.js";
-import { DRACOLoader } from "./three_js/DRACOLoader.js";
-import { OrbitControls } from "./three_js/OrbitControls.js";
-
+//create scene
 let scene = new THREE.Scene();
 scene.background = new THREE.Color("#ffffff");
 const camera = new THREE.PerspectiveCamera(
@@ -13,27 +12,31 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   10000
 );
-camera.position.set(-1000, 900, -2500);
+camera.position.set(-1000, 900, -2500); 
 
+//create renderer
 var renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setClearColor(0x000000);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-// renderer.physicallyCorrectLights = true;
 document.body.appendChild(renderer.domElement);
 
+// Hemisphere Light
 let hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
 hemiLight.position.set(0, 800, -750);
 scene.add(hemiLight);
 
+// Directional Light
 let dirLight = new THREE.DirectionalLight(0xffffff);
 dirLight.position.set(75, 800, -750);
 scene.add(dirLight);
 
+//Ambient Light
 let ambientLight = new THREE.AmbientLight(0xfffff0);
 ambientLight.position.set(0, 700, 0);
 scene.add(ambientLight);
 
+// Model loader call
 let loader = new GLTFLoader();
 let dracoLoader = new DRACOLoader();
 loader.setDRACOLoader(dracoLoader);
@@ -56,25 +59,25 @@ loader.load(
   }
 );
 
-//MORSKIE OKO ZNACZNIK
-let momaterial = new THREE.LineBasicMaterial({
+//MORSKIE OKO  create marker
+let momaterial = new THREE.LineBasicMaterial({ // create material
   color: 0x0000ff,
   linewidth: 10,
   linecap: "round",
   linejoin: "roud",
 });
 
-let mopoints = [];
+let mopoints = []; 
 mopoints.push(new THREE.Vector3(0, 0, 0));
 mopoints.push(new THREE.Vector3(0, 850, 0));
 
-let mogeometry = new THREE.BufferGeometry().setFromPoints(mopoints);
+let mogeometry = new THREE.BufferGeometry().setFromPoints(mopoints); // create geometry
 
-let moline = new THREE.Line(mogeometry, momaterial);
+let moline = new THREE.Line(mogeometry, momaterial); // create line
 moline.position.set(-100, 0, 0);
 scene.add(moline);
 
-var fontLoader = new THREE.FontLoader();
+var fontLoader = new THREE.FontLoader(); // create text marker
 
 fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
   let Textgeometry = new THREE.TextGeometry("Morskie Oko", {
@@ -95,7 +98,7 @@ fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
   scene.add(text);
 });
 
-//Rysy znacznik
+//Rysy create marker
 let rmaterial = new THREE.LineBasicMaterial({
   color: 0xff0000,
   linewidth: 10,
@@ -132,7 +135,7 @@ fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
   scene.add(text);
 });
 
-//Kozi Wierch znacznik
+//Kozi Wierch create marker
 let kwmaterial = new THREE.LineBasicMaterial({
   color: 0xff0000,
   linewidth: 10,
@@ -169,7 +172,7 @@ fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
   scene.add(text);
 });
 
-//Wielki staw znacznik
+//Wielki staw create marker
 let wsmaterial = new THREE.LineBasicMaterial({
   color: 0x0000ff,
   linewidth: 10,
@@ -206,13 +209,16 @@ fontLoader.load("./fonts/gentilis_regular.typeface.json", function (font) {
   scene.add(text);
 });
 
+
+//Navigation controlls
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
 controls.screenSpacePanning = false;
-controls.minDistance = 1;
-controls.maxDistance = 5000;
+controls.minDistance = 1; //zoom in distance
+controls.maxDistance = 5000; //zoom out distance
 
+//window scaling
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -221,6 +227,7 @@ function onWindowResize() {
 
 window.addEventListener("resize", onWindowResize, false);
 
+//rendering in the scene
 function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);

@@ -1,11 +1,10 @@
-//cdn
 
-import * as THREE from "./three_js/three.module.js";
-import { GLTFLoader } from "./three_js/GLTFLoader.js";
-import { DRACOLoader } from "./three_js/DRACOLoader.js";
-import { ARButton } from "./three_js/ARButton.js";
-import { OrbitControls } from "./three_js/OrbitControls.js";
+import * as THREE from "./three_js/three.module.js"; // Three js import
+import { GLTFLoader } from "./three_js/GLTFLoader.js"; // model loader import
+import { DRACOLoader } from "./three_js/DRACOLoader.js"; // decoder import
+import { ARButton } from "./three_js/ARButton.js"; // AR button import
 
+//Create scene
 let scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -14,45 +13,42 @@ const camera = new THREE.PerspectiveCamera(
   10000
 );
 
+//create renderer
 var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-// renderer.setClearColor(0x000000);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.xr.enabled = true;
+renderer.xr.enabled = true; // Virtual reality content enabled
 document.body.appendChild(renderer.domElement);
-document.body.appendChild(ARButton.createButton(renderer));
+document.body.appendChild(ARButton.createButton(renderer)); // Add AR button to the main page
 
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.05;
-controls.screenSpacePanning = false;
-controls.minDistance = 1;
-controls.maxDistance = 5000;
-
+// Hemisphere Light 
 let hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
 hemiLight.position.set(0, 0, 0);
 scene.add(hemiLight);
 
+// Directional Light
 let dirLight = new THREE.DirectionalLight(0xffffff);
 dirLight.position.set(0, 0, 0);
 scene.add(dirLight);
 
+// Ambient Light
 let ambientLight = new THREE.AmbientLight(0xfffff0);
 ambientLight.position.set(0, 0, 0);
 scene.add(ambientLight);
 
+// On Select 
 let onSelect = () => {
-  let loader = new GLTFLoader();
-  let dracoLoader = new DRACOLoader();
+  let loader = new GLTFLoader(); // Model Loader
+  let dracoLoader = new DRACOLoader(); // decoder
   loader.setDRACOLoader(dracoLoader);
   let mesh;
   loader.load(
-    "./model/gisday_rysy.gltf",
+    "./model/gisday_rysy.gltf", // model path
     function (gltf) {
       mesh = gltf.scene;
       mesh.material = new THREE.MeshLambertMaterial();
-      mesh.material.flatShading = true;
-      mesh.material.metalness = 0;
+      mesh.material.flatShading = true; 
+      mesh.material.metalness = 0; 
       mesh.position.set(0, -10, -20).applyMatrix4(controller.matrixWorld);
       mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
       mesh.scale.set(0.01, 0.01, 0.01);
@@ -68,10 +64,12 @@ let onSelect = () => {
   );
 };
 
+// VR AR controller
 let controller = renderer.xr.getController(0);
 controller.addEventListener("select", onSelect);
 scene.add(controller);
 
+// window scaling
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -79,6 +77,7 @@ function onWindowResize() {
 }
 window.addEventListener("resize", onWindowResize, false);
 
+//rendering in the scene
 function animate() {
   renderer.setAnimationLoop(render);
 }
