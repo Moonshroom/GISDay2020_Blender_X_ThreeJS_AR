@@ -8,7 +8,7 @@
 
 Model wykorzystany na potrzeby projektu został wykonany za pośrednictwem oprogramowaia [ Blender 2.90.1 ](https://www.blender.org/).
 
-![model_image](https://github.com/Moonshroom/GISDay2020_Blender_X_ThreeJS_AR/tree/master/img/model.png)
+![model_image](https://raw.githubusercontent.com/Moonshroom/GISDay2020_Blender_X_ThreeJS_AR/master/img/model.PNG)
 
 ---
 
@@ -17,7 +17,7 @@ Model wykorzystany na potrzeby projektu został wykonany za pośrednictwem oprog
 Aplikacja została stworzaona w oparciu o biblioteke WebGL [Three JS](https://threejs.org/).
 
 Kontent AR jest możliwy po zainstalowaniu wtyczki [WebXR Emulator Extension AR support](https://chrome.google.com/webstore/detail/webxr-api-emulator/mjddjgeghkdijejnciaefnkjmkafnnje) w przypadku nie posiadania urządzenia pozwalającego na dostęp do rozszerzonej rzeczywistości.
-![WebXR Emulator Extension AR support](https://github.com/Moonshroom/GISDay2020_Blender_X_ThreeJS_AR/tree/master/img/WebXrEmulator.PNG)
+![WebXR Emulator Extension AR support](https://raw.githubusercontent.com/Moonshroom/GISDay2020_Blender_X_ThreeJS_AR/master/img/WebXREmulator.PNG)
 
 ---
 
