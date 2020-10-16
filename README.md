@@ -1,9 +1,3 @@
----
-title: GISDay 2020
-author: Mateusz Orylski
-date: 15.10.2020
----
-
 # Projekt wykonany w ramach GISDay 2020.
 
 #### [_18 Listopada 2020_](https://www.facebook.com/events/1237160989985193?active_tab=about) | [Youtube](https://www.youtube.com/channel/UCsL3Nj52LgV9aY3j7MoYISA) | [**Link do aplikacji**](https://moonshroom.github.io/GISDay2020_Blender_X_ThreeJS_AR/)
@@ -14,7 +8,7 @@ date: 15.10.2020
 
 Model wykorzystany na potrzeby projektu został wykonany za pośrednictwem oprogramowaia [ Blender 2.90.1 ](https://www.blender.org/).
 
-![model_image](./img/model.png)
+![model_image](https://github.com/Moonshroom/GISDay2020_Blender_X_ThreeJS_AR/tree/master/img/model.png)
 
 ---
 
@@ -23,7 +17,7 @@ Model wykorzystany na potrzeby projektu został wykonany za pośrednictwem oprog
 Aplikacja została stworzaona w oparciu o biblioteke WebGL [Three JS](https://threejs.org/).
 
 Kontent AR jest możliwy po zainstalowaniu wtyczki [WebXR Emulator Extension AR support](https://chrome.google.com/webstore/detail/webxr-api-emulator/mjddjgeghkdijejnciaefnkjmkafnnje) w przypadku nie posiadania urządzenia pozwalającego na dostęp do rozszerzonej rzeczywistości.
-![WebXR Emulator Extension AR support](./img/WebXrEmulator.PNG)
+![WebXR Emulator Extension AR support](https://github.com/Moonshroom/GISDay2020_Blender_X_ThreeJS_AR/tree/master/img/WebXrEmulator.PNG)
 
 ---
 
@@ -55,3 +49,11 @@ Kontent AR jest możliwy po zainstalowaniu wtyczki [WebXR Emulator Extension AR 
 ```
 
 - **README.md** - plik markdown
+
+---
+
+title: GISDay 2020
+author: Mateusz Orylski
+date: 15.10.2020
+
+---
